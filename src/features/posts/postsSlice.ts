@@ -9,7 +9,7 @@ const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 
 
 const initialState: Posts = {
-  posts: [],
+  data: [],
   status: "idle",
   error: null,
 };
@@ -17,6 +17,7 @@ const initialState: Posts = {
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   try {
     const response = await axios.get(POSTS_URL);
+    console.log("data alındı")
     return response.data;
   } catch (error: any) {
     return error.message;
@@ -36,32 +37,32 @@ export const postsSlice = createSlice({
   initialState,
   name: "posts",
   reducers: {
-    addPost: {
-      reducer(state, action: PayloadAction<PostsProps>) {
-        state.posts.push(action.payload);
-      },
-      prepare({ title, body, userId }) {
-        return {
-          payload: {
-            id: nanoid(),
-            title,
-            body,
-            userId,
-            date: new Date().toISOString(),
-            reactions: {
-              thumbsUp: 0,
-              wow: 0,
-              heart: 0,
-              rocket: 0,
-              coffee: 0,
-            },
-          },
-        };
-      },
-    },
+    // addPost: {
+    //   reducer(state, action: PayloadAction<PostsProps>) {
+    //     state.data.push(action.payload);
+    //   },
+    //   prepare({ title, body, userId }) {
+    //     return {
+    //       payload: {
+    //         id: nanoid(),
+    //         title,
+    //         body,
+    //         userId,
+    //         date: new Date().toISOString(),
+    //         reactions: {
+    //           thumbsUp: 0,
+    //           wow: 0,
+    //           heart: 0,
+    //           rocket: 0,
+    //           coffee: 0,
+    //         },
+    //       },
+    //     };
+    //   },
+    // },
     addReaction(state, action) {
       const { postId, reaction } = action.payload;
-      const existingPost = state.posts.find((post) => post.id == postId);
+      const existingPost = state.data.find((post) => post.id == postId);
       if (existingPost) {
         existingPost.reactions[reaction as keyof typeof reactionEmoji]++;
       }
@@ -87,7 +88,7 @@ export const postsSlice = createSlice({
           };
           return post;
         });
-        state.posts = state.posts.concat(loadedPosts);
+        state.data = state.data.concat(loadedPosts);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = "failed";
@@ -104,15 +105,16 @@ export const postsSlice = createSlice({
             rocket: 0,
             coffee: 0,
         }
-        state.posts.push(action.payload);
+        console.log(action.payload)
+        state.data.push(action.payload);
       });
       
   },
 });
 
-export const getAllPosts = (state: RootState) => state.posts.posts;
+export const getAllPosts = (state: RootState) => state.posts.data;
 export const getPostStatus = (state: RootState) => state.posts.status;
 export const getPostError = (state: RootState) => state.posts.error;
 
-export const { addPost, addReaction} = postsSlice.actions;
+export const { addReaction} = postsSlice.actions;
 export default postsSlice.reducer;

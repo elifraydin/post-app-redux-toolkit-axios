@@ -5,8 +5,6 @@ import axios from "axios"
 
 const USERS_URL = "https://jsonplaceholder.typicode.com/users";
 
-
-
 const initialState: UsersObject[] = []
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
@@ -22,19 +20,19 @@ export const usersSlice = createSlice({
     initialState,
     name: 'users',
     reducers: {
-      addUser: {
-        reducer(state, action: PayloadAction<UsersObject>) {
-          state.push(action.payload)
-        },
-        prepare(name) {
-          return {
-            payload: {
-              id: nanoid(),
-              name,
-            }
-        }
-      }
-    }
+    //   addUser: {
+    //     reducer(state, action: PayloadAction<UsersObject>) {
+    //       state.push(action.payload)
+    //     },
+    //     prepare(name) {
+    //       return {
+    //         payload: {
+    //           id: nanoid(),
+    //           name,
+    //         }
+    //     }
+    //   }
+    // }
   },
   extraReducers(builder) {
       builder.addCase(fetchUsers.fulfilled, (state, action) => {
@@ -45,5 +43,5 @@ export const usersSlice = createSlice({
 
 export const getAllUsers = (state: RootState) => state.users
 
-export const {addUser} = usersSlice.actions;
+//export const {addUser} = usersSlice.actions;
 export default usersSlice.reducer;

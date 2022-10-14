@@ -21,7 +21,7 @@ export interface PostsProps {
   }
   
   export interface Posts {
-    posts: PostsProps[];
+    data: PostsProps[];
     status: string;
     error: string | null | undefined;
   }

@@ -8,9 +8,7 @@ interface PostsExerptProps extends HTMLAttributes<HTMLElement> {
   post: PostsProps
 }
 
-
-
-export function PostsExerpt({post, ...rest}: PostsExerptProps) {
+export function PostCard({post, ...rest}: PostsExerptProps) {
   return (
     <article {...rest}>
       <h3>{post.title}</h3>

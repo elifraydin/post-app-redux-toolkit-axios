@@ -4,8 +4,8 @@ import {Provider} from "react-redux";
 import {store} from "../src/store/store";
 import {fetchUsers} from "./features/users/usersSlice";
 
+//uygulama ilk yüklendiğinde kullanıcıları almak istiyorum, store sayesinde erişim var
 store.dispatch(fetchUsers());
-
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
