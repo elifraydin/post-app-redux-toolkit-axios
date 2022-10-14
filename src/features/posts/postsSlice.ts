@@ -3,7 +3,7 @@ import axios from "axios"
 import { sub } from "date-fns";
 import { RootState } from "../../store/store";
 import { reactionEmoji } from "../../components/ReactionButton";
-import { Posts, PostsProps } from "../../types/interfaces";
+import { Posts, PostsProps, UsersObject } from "../../types/interfaces";
 
 const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 
@@ -115,6 +115,11 @@ export const postsSlice = createSlice({
 export const getAllPosts = (state: RootState) => state.posts.data;
 export const getPostStatus = (state: RootState) => state.posts.status;
 export const getPostError = (state: RootState) => state.posts.error;
+
+
+
+export const selectPostById = (state:RootState, postId:String) => state.posts.data.find(item => item.id === postId);
+
 
 export const { addReaction} = postsSlice.actions;
 export default postsSlice.reducer;
