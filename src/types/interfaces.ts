@@ -6,7 +6,7 @@ export interface UsersObject {
 }
 
 export interface PostsProps {
-    id: string;
+    id: string | number;
     title: string;
     body: string;
     userId: string;

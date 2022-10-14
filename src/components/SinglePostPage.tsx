@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector} from "../store/store";
 import { selectPostById } from '../features/posts/postsSlice'
 
 import {PostAuthor} from "./PostAuthor";
@@ -8,11 +8,13 @@ import { RootState } from "../store/store";
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+
+
 const SinglePostPage = () => {
     const { postId } = useParams()
 
 
-    const post = useSelector((state:RootState) => selectPostById(state, postId))
+    const post = useAppSelector((state:RootState) => selectPostById(state, postId!))
 
     if (!post) {
         return (
