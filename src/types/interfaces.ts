@@ -1,5 +1,10 @@
 type dateISO = ReturnType<typeof Date.toString>;
 
+export interface UsersObject {
+  name: string;
+  id: string;
+}
+
 export interface PostsProps {
     id: string;
     title: string;

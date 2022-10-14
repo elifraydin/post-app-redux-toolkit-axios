@@ -1,15 +1,13 @@
 import {createAsyncThunk, createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit";
 import { RootState } from "../../store/store";
+import {UsersObject} from "../../types/interfaces"
 import axios from "axios"
 
 const USERS_URL = "https://jsonplaceholder.typicode.com/users";
 
-interface users {
-  name: string;
-  id: string;
-}
 
-const initialState: users[] = []
+
+const initialState: UsersObject[] = []
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   try {
@@ -25,7 +23,7 @@ export const usersSlice = createSlice({
     name: 'users',
     reducers: {
       addUser: {
-        reducer(state, action: PayloadAction<users>) {
+        reducer(state, action: PayloadAction<UsersObject>) {
           state.push(action.payload)
         },
         prepare(name) {

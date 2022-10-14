@@ -1,4 +1,4 @@
-import { dispatch } from "../store/store"
+import { useAppDispatch } from "../store/store"
 import { addReaction } from "../features/posts/postsSlice"
 import {PostsProps} from "../types/interfaces"
 
@@ -15,6 +15,7 @@ interface ReactionButtonProps {
 }
 
 export function ReactionButton({post}: ReactionButtonProps) {
+  const dispatch = useAppDispatch()
 
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => (
     <button

@@ -1,4 +1,4 @@
-import { useSelector } from "../store/store"
+import { useAppSelector } from "../store/store"
 import { getAllUsers } from "../features/users/usersSlice"
 
 interface PostAuthorProps {
@@ -6,7 +6,7 @@ interface PostAuthorProps {
 }
 
 export function PostAuthor({userId}: PostAuthorProps) {
-  const users = useSelector(getAllUsers);
+  const users = useAppSelector(getAllUsers);
 
   const author = users.find(user => user.id === userId);
 

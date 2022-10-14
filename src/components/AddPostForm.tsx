@@ -1,11 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useDispatch,useSelector  } from "../store/store"
+import { useAppDispatch,useAppSelector   } from "../store/store"
 import { getAllUsers } from "../features/users/usersSlice"
 import { addNewPosts } from "../features/posts/postsSlice"
 
 export function AddPostForm() {
-  const users = useSelector(getAllUsers);
-  const dispatch = useDispatch();
+  const users = useAppSelector(getAllUsers)
+  const dispatch = useAppDispatch();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [userId, setUserId] = useState("");

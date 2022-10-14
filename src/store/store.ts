@@ -1,27 +1,17 @@
 import {combineReducers, configureStore, ThunkDispatch} from "@reduxjs/toolkit";
-import { useSelector as useAppSelector, useDispatch as useAppDispatch, TypedUseSelectorHook } from "react-redux";
-import postsReducer from "../features/posts/postsSlice"
-import usersReducer from "../features/users/usersSlice"
+import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
+import postsSlice from "../features/posts/postsSlice"
+import usersSlice from "../features/users/usersSlice"
 
-  const reducer = combineReducers(
-    {
-      posts: postsReducer,
-      users: usersReducer
-    }
-  )
-
-const store = configureStore({
-  reducer
+export const store = configureStore({
+  reducer: {
+      posts: postsSlice,
+      users:usersSlice
+  },
 })
 
-export type RootState = ReturnType<typeof reducer>;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
-export type AppDispatch = typeof store.dispatch;
-const useDispatch = () => useAppDispatch<AppDispatch>();
-
-
-const {dispatch} = store;
-
-const useSelector: TypedUseSelectorHook<RootState> = useAppSelector;
-
-export {useSelector, useDispatch, dispatch, store}
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
